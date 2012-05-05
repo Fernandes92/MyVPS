@@ -1,0 +1,28 @@
+# skip the startup message
+startup_message off
+ 
+# Display a caption string below, appearing like tabs and
+# displaying the window number and application name (by default).
+caption always
+caption string "%{kw}%-w%{wr}%n %t%{-}%+w"
+#
+# j to move down a window, k to move up. Like teh VIM!
+bind j focus down
+bind k focus up
+
+# For the screen on the server, we can't use C-a since we do that
+# from the OS X terminal as well. 
+#
+# Default screens
+screen -t VIM
+screen -t Bash
+screen -t Git
+#
+# Select first screen
+select 0
+
+# Make xterm scrolling work properly with screen.
+termcapinfo xterm-color|xterm|xterms|xs|rxvt ti@:te@
+
+# Scroll amount!
+defscrollback 10000
