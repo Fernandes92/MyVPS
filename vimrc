@@ -1,18 +1,35 @@
+"source $VIMRUNTIME/vimrc_example.vim
 set nocompatible
-source $VIMRUNTIME/vimrc_example.vim
+set lines=50
+set columns=83
 set number
 set nobackup       
 set nowritebackup  
-set noswapfile     
-set smartindent
 set nohlsearch
 set term=xterm
-set copyindent
 set tabstop=2
 set shiftwidth=2
 set expandtab
+set showcmd
+set ruler
+set incsearch
+filetype plugin indent on
+syntax enable
 
+" Scroll in the middle of the screen
+set scrolloff=1000
 
+" Underline the current line
+set cursorline
+
+" Swap visual mode and visual line commands
+nnoremap v V
+nnoremap V v
+vnoremap v V
+vnoremap V v
+
+" Activate backspace
+set backspace=indent,eol,start
 
 if exists('+autochdir')
   set autochdir
@@ -20,34 +37,7 @@ else
   autocmd BufEnter * silent! lcd %:p:h:gs/ /\\ /
 endif
 
-"set spell spelllang=en_us spellfile=~/.vim/dict.add
-set pdev=main
-inoremap <S-Tab> <Esc>
-colorscheme elflord
-set diffexpr=MyDiff()
-function MyDiff()
-  let opt = '-a --binary '
-  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-  let arg1 = v:fname_in
-  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-  let arg2 = v:fname_new
-  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-  let arg3 = v:fname_out
-  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-  let eq = ''
-  if $VIMRUNTIME =~ ' '
-    if &sh =~ '\<cmd'
-      let cmd = '""' . $VIMRUNTIME . '\diff"'
-      let eq = '"'
-    else
-      let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
-    endif
-  else
-    let cmd = $VIMRUNTIME . '\diff'
-  endif
-  silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
-endfunction
+colorscheme desert
 
 highlight Cursor guifg=white guibg=black
 highlight iCursor guifg=white guibg=steelblue
@@ -62,7 +52,45 @@ au BufNewFile,BufRead *.install set filetype=php
 au BufNewFile,BufRead *.inc set filetype=php
 au BufNewFile,BufRead *.md set filetype=txt
 
-:filetype plugin on 
+filetype plugin on 
 
 " Highlight lines longer than 80 with F5. Have to enable highlight
 map <F5> /\%>80v.\+<Enter>
+
+" Insert timestamp
+nmap <F3> a<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc>
+imap <F3> <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR>
+
+" use Ctrl+L to toggle the line number counting method
+function! g:ToggleNuMode()
+  if &nu == 1
+     set rnu
+  else
+     set nu
+  endif
+endfunction
+nnoremap <C-L> :call g:ToggleNuMode()<cr>
+
+"Use TAB to complete when typing words, else inserts TABs as usual.
+"Uses dictionary and source files to find matching words to complete.
+
+"See help completion for source,
+"Note: usual completion is on <C-n> but more trouble to press all the time.
+"Never type the same word twice and maybe learn a new spellings!
+"Use the Linux dictionary when spelling is in doubt.
+"Window users can copy the file to their machine.
+function! Tab_Or_Complete()
+  if col('.')>1 && strpart( getline('.'), col('.')-2, 3 ) =~ '^\w'
+    return "\<C-N>"
+  else
+    return "\<Tab>"
+  endif
+endfunction
+inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
+
+" Make CtrlP open files in new tabs
+"let g:ctrlp_prompt_mappings = {
+"  \ 'AcceptSelection("e")': [],
+"  \ 'AcceptSelection("t")': ['<cr>', '<c-m>'],
+"  \ }
+
