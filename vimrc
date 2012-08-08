@@ -69,7 +69,7 @@ function! g:ToggleNuMode()
      set nu
   endif
 endfunction
-nnoremap <C-L> :call g:ToggleNuMode()<cr>
+nnoremap <silent><C-L> :call g:ToggleNuMode()<cr>
 
 "Use TAB to complete when typing words, else inserts TABs as usual.
 "Uses dictionary and source files to find matching words to complete.
