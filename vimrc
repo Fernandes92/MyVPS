@@ -94,3 +94,6 @@ inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
 "  \ 'AcceptSelection("t")': ['<cr>', '<c-m>'],
 "  \ }
 
+" Disable visual bell
+set vb
+set t_vb=
