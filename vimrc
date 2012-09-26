@@ -13,11 +13,9 @@ set expandtab
 set showcmd
 set ruler
 set incsearch
+set rnu
 filetype plugin indent on
 syntax enable
-
-" Scroll in the middle of the screen
-set scrolloff=1000
 
 " Underline the current line
 set cursorline
@@ -89,11 +87,12 @@ endfunction
 inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
 
 " Make CtrlP open files in new tabs
-"let g:ctrlp_prompt_mappings = {
-"  \ 'AcceptSelection("e")': [],
-"  \ 'AcceptSelection("t")': ['<cr>', '<c-m>'],
-"  \ }
+let g:ctrlp_prompt_mappings = {
+  \ 'AcceptSelection("e")': [],
+  \ 'AcceptSelection("t")': ['<cr>', '<c-m>'],
+  \ }
 
-" Disable visual bell
-set vb
+
+" No visual bell!!!
+set visualbell
 set t_vb=
