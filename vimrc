@@ -7,8 +7,8 @@ set nobackup
 set nowritebackup  
 set nohlsearch
 set term=xterm
-set tabstop=2
-set shiftwidth=2
+set tabstop=4
+set shiftwidth=4
 set expandtab
 set showcmd
 set ruler
