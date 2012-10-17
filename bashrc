@@ -108,16 +108,8 @@ set -o vi
 
 ## Custom functions
 
-# Initialize tablet settings
-function tablet(){
-	xsetwacom --set "Wacom BambooFun 4x5 stylus" area "0 0 200000 100000"
-	xsetwacom --set "Wacom BambooFun 4x5 stylus" mode "Relative"
-	echo "Bamboo tablet settings initialized"
-	xournal &>/dev/null &
-}
-
 # Add scripts to path
-export PATH=${PATH}:$(find /usr/local/scripts -type d | tr -s '\n' ':' )
+#export PATH=${PATH}:$(find /usr/local/scripts -type d | tr -s '\n' ':' )
 
 
 # Activate virtualenv
@@ -125,13 +117,3 @@ function activate(){
 	. env/bin/activate
 }
 
-# encode a video
-# arg1: video origin
-# arg2: destination
-function encode_video(){
-  ffmpeg -y -i $1 -vcodec libx264 -crf 21 -acodec aac -ac 2 -ab 192000 -strict experimental $2
-}
-
-function open(){
-  kde-open $@
-}
