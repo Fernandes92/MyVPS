@@ -1,0 +1,22 @@
+[user]
+	name = Joseph McCullough
+	email = joseph@vertstudios.com
+[alias]
+		mylog = log --pretty='format:%Cgreen%H %Cred%ai %Creset- %s'
+		pushm = push origin master
+		pullm = pull origin master
+		graph = log --graph --date-order -C -M --pretty=format:\"<%h> %ad [%an] %Cgreen%d%Creset %s\" --all --date=short
+    last = log -n 1 --oneline
+    s = status -s
+
+[merge]
+	tool = vimdiff
+[core]
+	editor = vim -f
+	excludesfile = ~/.gitignore
+	sharedRepository = group
+[push]
+	default = tracking
+[merge]
+tool = opendiff
+
