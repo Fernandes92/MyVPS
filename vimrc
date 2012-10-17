@@ -1,7 +1,5 @@
-"source $VIMRUNTIME/vimrc_example.vim
+source $VIMRUNTIME/vimrc_example.vim
 set nocompatible
-set lines=50
-set columns=83
 set number
 set nobackup       
 set nowritebackup  
