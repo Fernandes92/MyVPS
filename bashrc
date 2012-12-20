@@ -117,3 +117,11 @@ function activate(){
 	. env/bin/activate
 }
 
+function simpleserv(){
+    python -m SimpleHTTPServer
+}
+
+function codestream(){
+    screenxtv-gcc-client -f ~/.screenxtv
+}
+
