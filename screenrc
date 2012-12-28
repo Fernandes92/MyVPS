@@ -15,8 +15,11 @@ bind k focus up
 #
 # Default screens
 screen -t VIM
+screen -t test
+screen -t git
+screen -t python
+screen -t serv
 screen -t Bash
-screen -t Git
 #
 # Select first screen
 select 0
