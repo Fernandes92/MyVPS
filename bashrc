@@ -125,3 +125,5 @@ function codestream(){
     screenxtv-gcc-client -f ~/.screenxtv
 }
 
+# Copy to primary clipboard. Requires xclip
+alias clip="xclip -sel c"

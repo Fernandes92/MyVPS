@@ -94,3 +94,6 @@ let g:ctrlp_prompt_mappings = {
 " No visual bell!!!
 set visualbell
 set t_vb=
+
+" Allow bash aliases 
+set shellcmdflag=-ic
