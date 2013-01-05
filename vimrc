@@ -17,6 +17,7 @@ syntax enable
 
 " Underline the current line
 set cursorline
+highlight CursorLine cterm=standout ctermbg=black ctermfg=grey
 
 " Swap visual mode and visual line commands
 nnoremap v V
