@@ -106,5 +106,4 @@ set dir=~/.vim/sessions
 " Easymotion shortcuts
 map <C-O> <Leader><Leader>w
 map <C-E> <Leader><Leader>W
-nmap , <Leader><Leader>f
-vmap , <Leader><Leader>f
+map <S-s> <Leader><Leader>f
