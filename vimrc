@@ -12,12 +12,12 @@ set showcmd
 set ruler
 set incsearch
 set rnu
+set textwidth=80
 filetype plugin indent on
 syntax enable
 
 " Underline the current line
 set cursorline
-highlight CursorLine cterm=standout ctermbg=black ctermfg=grey
 
 " Swap visual mode and visual line commands
 nnoremap v V
@@ -53,6 +53,9 @@ filetype plugin on
 
 " Highlight lines longer than 80 with F5. Have to enable highlight
 map <F5> /\%>80v.\+<Enter>
+
+" Yank the last blogimg call on the current line. Useful for article writing
+map <F4> mlG?blogimg<Enter>yy'lP/\d<Enter>
 
 " Insert timestamp
 nmap <F3> a<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc>
@@ -96,5 +99,12 @@ let g:ctrlp_prompt_mappings = {
 set visualbell
 set t_vb=
 
-" Allow bash aliases 
-set shellcmdflag=-ic
+" Move Backup Files to ~/.vim/sessions
+set backupdir=~/.vim/sessions
+set dir=~/.vim/sessions
+
+" Easymotion shortcuts
+map <C-O> <Leader><Leader>w
+map <C-E> <Leader><Leader>W
+nmap , <Leader><Leader>f
+vmap , <Leader><Leader>f
