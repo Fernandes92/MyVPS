@@ -114,7 +114,7 @@ endif
 
 " motions to map per default
 if !exists("g:repmo_mapmotions")
-    let g:repmo_mapmotions = "j|k h|l <C-E>|<C-Y> zh|zl"
+    let g:repmo_mapmotions = "j|k h|l w|b W|B"
     " use "<bar>" to map "|"
 endif
 
