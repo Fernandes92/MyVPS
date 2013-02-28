@@ -5,3 +5,4 @@ cp bashrc ~/.bashrc
 cp screenrc ~/.screenrc
 cp .gitconfig ~/.gitconfig
 cp .gitignore ~/.gitignore
+cp -r vim ~/.vim
