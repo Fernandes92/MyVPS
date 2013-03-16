@@ -106,4 +106,6 @@ set dir=~/.vim/sessions
 " Easymotion shortcuts
 map <C-O> <Leader><Leader>w
 map <C-E> <Leader><Leader>W
-map f <Leader><Leader>f
+map T <Leader><Leader>f
+
+nnoremap <silent><C-M> :w<cr>:!pdflatex % &>/dev/null &<cr><cr>
