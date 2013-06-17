@@ -106,11 +106,7 @@ fi
 
 set -o vi
 
-## Custom functions
-
-# Add scripts to path
 #export PATH=${PATH}:$(find /usr/local/scripts -type d | tr -s '\n' ':' )
-
 
 # Activate virtualenv
 function activate(){
@@ -120,10 +116,4 @@ function activate(){
 function simpleserv(){
     python -m SimpleHTTPServer
 }
-
-function codestream(){
-    screenxtv-gcc-client -f ~/.screenxtv
-}
-
-# Copy to primary clipboard. Requires xclip
 alias clip="xclip -sel c"
