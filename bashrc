@@ -117,3 +117,4 @@ function simpleserv(){
     python -m SimpleHTTPServer
 }
 alias clip="xclip -sel c"
+alias mg="python manage.py"
