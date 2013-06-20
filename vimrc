@@ -108,4 +108,5 @@ map <C-O> <Leader><Leader>w
 map <C-E> <Leader><Leader>W
 map T <Leader><Leader>f
 
-nnoremap <silent><C-M> :w<cr>:!pdflatex % &>/dev/null &<cr><cr>
+" Ignore git and virtualenv directories for ctrlP
+let g:ctrlp_custom_ignore = 'env\|git'
