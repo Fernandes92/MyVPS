@@ -109,9 +109,7 @@ set -o vi
 #export PATH=${PATH}:$(find /usr/local/scripts -type d | tr -s '\n' ':' )
 
 # Activate virtualenv
-function activate(){
-	. env/bin/activate
-}
+alias activate=". ~/envs/$(basename `pwd`)/bin/activate"
 
 function simpleserv(){
     python -m SimpleHTTPServer
