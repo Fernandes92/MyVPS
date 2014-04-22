@@ -1,8 +1,8 @@
 source $VIMRUNTIME/vimrc_example.vim
 set nocompatible
 set number
-set nobackup       
-set nowritebackup  
+set nobackup
+set nowritebackup
 set nohlsearch
 set term=xterm
 set tabstop=4
@@ -13,6 +13,7 @@ set ruler
 set incsearch
 set rnu
 set textwidth=80
+"set iskeyword-=_
 filetype plugin indent on
 syntax enable
 
@@ -49,7 +50,7 @@ au BufNewFile,BufRead *.install set filetype=php
 au BufNewFile,BufRead *.inc set filetype=php
 au BufNewFile,BufRead *.md set filetype=txt
 
-filetype plugin on 
+filetype plugin on
 
 " Highlight lines longer than 80 with F5. Have to enable highlight
 map <F5> /\%>80v.\+<Enter>
@@ -89,10 +90,10 @@ endfunction
 inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
 
 " Make CtrlP open files in new tabs
-let g:ctrlp_prompt_mappings = {
-  \ 'AcceptSelection("e")': [],
-  \ 'AcceptSelection("t")': ['<cr>', '<c-m>'],
-  \ }
+"let g:ctrlp_prompt_mappings = {
+  "\ 'AcceptSelection("e")': [],
+  "\ 'AcceptSelection("t")': ['<cr>', '<c-m>'],
+  "\ }
 
 
 " No visual bell!!!

@@ -3,15 +3,15 @@
 " Author: Kim Silkebækken <kim.silkebaekken+vim@gmail.com>
 " Source repository: https://github.com/Lokaltog/vim-easymotion
 
-" Default configuration functions {{{
-	function! StupidEasyMotion#InitOptions(options) " {{{
+" Default configuration functions 
+	function! StupidEasyMotion#InitOptions(options) " 
 		for [key, value] in items(a:options)
 			if ! exists('g:StupidEasyMotion_' . key)
 				exec 'let g:StupidEasyMotion_' . key . ' = ' . string(value)
 			endif
 		endfor
-	endfunction " }}}
-	function! StupidEasyMotion#InitHL(group, colors) " {{{
+	endfunction " 
+	function! StupidEasyMotion#InitHL(group, colors) " 
 		let group_default = a:group . 'Default'
 
 		" Prepare highlighting variables
@@ -39,8 +39,8 @@
 
 		" No colors are defined for this group, link to defaults
 		execute printf('hi default link %s %s', a:group, group_default)
-	endfunction " }}}
-	function! StupidEasyMotion#InitMappings(motions) "{{{
+	endfunction " 
+	function! StupidEasyMotion#InitMappings(motions) 
 		for motion in keys(a:motions)
 			call StupidEasyMotion#InitOptions({ 'mapping_' . motion : g:StupidEasyMotion_leader_key . motion })
 		endfor
@@ -56,16 +56,16 @@
 				silent exec 'vnoremap <silent> ' . g:StupidEasyMotion_mapping_{motion} . ' :<C-U>call StupidEasyMotion#' . fn.name . '(1, ' . fn.dir . ')<CR>'
 			endfor
 		endif
-	endfunction "}}}
-" }}}
-" Motion functions {{{
-	function! StupidEasyMotion#WB(visualmode, direction) " {{{
+	endfunction 
+" 
+" Motion functions 
+	function! StupidEasyMotion#WB(visualmode, direction) " 
 		call s:StupidEasyMotion('\(\<.\|^$\)', a:direction, a:visualmode ? visualmode() : '', '')
-	endfunction " }}}
-	function! StupidEasyMotion#WBW(visualmode, direction) " {{{
+	endfunction " 
+	function! StupidEasyMotion#WBW(visualmode, direction) " 
 		call s:StupidEasyMotion('\(\(^\|\s\)\@<=\S\|^$\)', a:direction, a:visualmode ? visualmode() : '', '')
-	endfunction " }}}
-	function! StupidEasyMotion#F(visualmode, direction) " {{{
+	endfunction " 
+	function! StupidEasyMotion#F(visualmode, direction) " 
 		let char = s:GetSearchChar(a:visualmode)
 
 		if empty(char)
@@ -75,18 +75,18 @@
 		let re = '\C' . escape(char, '.$^~')
 
 		call s:StupidEasyMotion(re, a:direction, a:visualmode ? visualmode() : '', mode(1))
-	endfunction " }}}
-" }}}
-" Helper functions {{{
-	function! s:Message(message) " {{{
+	endfunction " 
+" 
+" Helper functions 
+	function! s:Message(message) " 
 		echo 'StupidEasyMotion: ' . a:message
-	endfunction " }}}
-	function! s:Prompt(message) " {{{
+	endfunction " 
+	function! s:Prompt(message) " 
 		echohl Question
 		echo a:message . ': '
 		echohl None
-	endfunction " }}}
-	function! s:VarReset(var, ...) " {{{
+	endfunction " 
+	function! s:VarReset(var, ...) " 
 		if ! exists('s:var_reset')
 			let s:var_reset = {}
 		endif
@@ -105,8 +105,8 @@
 			" Set new var value
 			call setbufvar(buf, a:var, new_value)
 		endif
-	endfunction " }}}
-	function! s:SetLines(lines, key) " {{{
+	endfunction " 
+	function! s:SetLines(lines, key) " 
 		try
 			" Try to join changes with previous undo block
 			undojoin
@@ -116,8 +116,8 @@
 		for [line_num, line] in a:lines
 			call setline(line_num, line[a:key])
 		endfor
-	endfunction " }}}
-	function! s:GetChar() " {{{
+	endfunction " 
+	function! s:GetChar() " 
 		let char = getchar()
 
 		if char == 27
@@ -130,8 +130,8 @@
 		endif
 
 		return nr2char(char)
-	endfunction " }}}
-	function! s:GetSearchChar(visualmode) " {{{
+	endfunction " 
+	function! s:GetSearchChar(visualmode) " 
 		call s:Prompt('Search for character')
 
 		let char = s:GetChar()
@@ -147,14 +147,14 @@
 		endif
 
 		return char
-	endfunction " }}}
-" }}}
-" Grouping algorithms {{{
+	endfunction " 
+" 
+" Grouping algorithms 
 	let s:grouping_algorithms = {
 	\   1: 'SCTree'
 	\ , 2: 'Original'
 	\ }
-	" Single-key/closest target priority tree {{{
+	" Single-key/closest target priority tree 
 		" This algorithm tries to assign one-key jumps to all the targets closest to the cursor.
 		" It works recursively and will work correctly with as few keys as two.
 		function! s:GroupingAlgorithmSCTree(targets, keys)
@@ -166,11 +166,11 @@
 
 			let keys = reverse(copy(a:keys))
 
-			" Semi-recursively count targets {{{
+			" Semi-recursively count targets 
 				" We need to know exactly how many child nodes (targets) this branch will have
 				" in order to pass the correct amount of targets to the recursive function.
 
-				" Prepare sorted target count list {{{
+				" Prepare sorted target count list 
 					" This is horrible, I know. But dicts aren't sorted in vim, so we need to
 					" work around that. That is done by having one sorted list with key counts,
 					" and a dict which connects the key with the keys_count list.
@@ -186,7 +186,7 @@
 
 						let i += 1
 					endfor
-				" }}}
+				" 
 
 				let targets_left = targets_len
 				let level = 0
@@ -216,8 +216,8 @@
 
 					let level += 1
 				endwhile
-			" }}}
-			" Create group tree {{{
+			" 
+			" Create group tree 
 				let i = 0
 				let key = 0
 
@@ -239,13 +239,13 @@
 					let key += 1
 					let i += key_count
 				endfor
-			" }}}
+			" 
 
 			" Finally!
 			return groups
 		endfunction
-	" }}}
-	" Original {{{
+	" 
+	" Original 
 		function! s:GroupingAlgorithmOriginal(targets, keys)
 			" Split targets into groups (1 level)
 			let targets_len = len(a:targets)
@@ -276,8 +276,8 @@
 
 			return groups
 		endfunction
-	" }}}
-	" Coord/key dictionary creation {{{
+	" 
+	" Coord/key dictionary creation 
 		function! s:CreateCoordKeyDict(groups, ...)
 			" Dict structure:
 			" 1,2 : a
@@ -315,11 +315,11 @@
 
 			return [sort_list, coord_keys]
 		endfunction
-	" }}}
-" }}}
-" Core functions {{{
-	function! s:PromptUser(groups) "{{{
-		" If only one possible match, jump directly to it {{{
+	" 
+" 
+" Core functions 
+	function! s:PromptUser(groups) 
+		" If only one possible match, jump directly to it 
 			let group_values = values(a:groups)
 
 			if len(group_values) == 1
@@ -327,8 +327,8 @@
 
 				return group_values[0]
 			endif
-		" }}}
-		" Prepare marker lines {{{
+		" 
+		" Prepare marker lines 
 			let lines = {}
 			let hl_coords = []
 			let coord_key_dict = s:CreateCoordKeyDict(a:groups)
@@ -369,10 +369,10 @@
 			endfor
 
 			let lines_items = items(lines)
-		" }}}
-		" Highlight targets {{{
+		" 
+		" Highlight targets 
 			let target_hl_id = matchadd(g:StupidEasyMotion_hl_group_target, join(hl_coords, '\|'), 1)
-		" }}}
+		" 
 
 		try
 			" Set lines with markers
@@ -380,34 +380,34 @@
 
 			redraw
 
-			" Get target character {{{
+			" Get target character 
 				call s:Prompt('Target key')
 
 				let char = s:GetChar()
-			" }}}
+			" 
 		finally
 			" Restore original lines
 			call s:SetLines(lines_items, 'orig')
 
-			" Un-highlight targets {{{
+			" Un-highlight targets 
 				if exists('target_hl_id')
 					call matchdelete(target_hl_id)
 				endif
-			" }}}
+			" 
 
 			redraw
 		endtry
 
-		" Check if we have an input char {{{
+		" Check if we have an input char 
 			if empty(char)
 				throw 'Cancelled'
 			endif
-		" }}}
-		" Check if the input char is valid {{{
+		" 
+		" Check if the input char is valid 
 			if ! has_key(a:groups, char)
 				throw 'Invalid target'
 			endif
-		" }}}
+		" 
 
 		let target = a:groups[char]
 
@@ -418,21 +418,21 @@
 			" Prompt for new target character
 			return s:PromptUser(target)
 		endif
-	endfunction "}}}
-	function! s:StupidEasyMotion(regexp, direction, visualmode, mode) " {{{
+	endfunction 
+	function! s:StupidEasyMotion(regexp, direction, visualmode, mode) " 
 		let orig_pos = [line('.'), col('.')]
 		let targets = []
 
 		try
-			" Reset properties {{{
+			" Reset properties 
 				call s:VarReset('&scrolloff', 0)
 				call s:VarReset('&modified', 0)
 				call s:VarReset('&modifiable', 1)
 				call s:VarReset('&readonly', 0)
 				call s:VarReset('&spell', 0)
 				call s:VarReset('&virtualedit', '')
-			" }}}
-			" Find motion targets {{{
+			" 
+			" Find motion targets 
 				let search_direction = (a:direction == 1 ? 'b' : '')
 				let search_stopline = line(".")
 				normal ^
@@ -469,7 +469,7 @@
 				if targets_len == 0
 					throw 'No matches'
 				endif
-			" }}}
+			" 
 
 			let GroupingFn = function('s:GroupingAlgorithm' . s:grouping_algorithms[g:StupidEasyMotion_grouping])
 			let groups = GroupingFn(targets, split(g:StupidEasyMotion_keys, '\zs'))
@@ -477,14 +477,14 @@
 			" Prompt user for target group/character
 			let coords = s:PromptUser(groups)
 
-			" Update selection {{{
+			" Update selection 
 				if ! empty(a:visualmode)
 					keepjumps call cursor(orig_pos[0], orig_pos[1])
 
 					exec 'normal! ' . a:visualmode
 				endif
-			" }}}
-			" Handle operator-pending mode {{{
+			" 
+			" Handle operator-pending mode 
 				if a:mode == 'no'
 					" This mode requires that we eat one more
 					" character to the right if we're using
@@ -493,7 +493,7 @@
 						let coords[1] += 1
 					endif
 				endif
-			" }}}
+			" 
 
 			" Update cursor position
 			call cursor(orig_pos[0], orig_pos[1])
@@ -507,29 +507,29 @@
 			" Show exception message
 			call s:Message(v:exception)
 
-			" Restore original cursor position/selection {{{
+			" Restore original cursor position/selection 
 				if ! empty(a:visualmode)
 					silent exec 'normal! gv'
 				else
 					keepjumps call cursor(orig_pos[0], orig_pos[1])
 				endif
-			" }}}
+			" 
 		finally
-			" Restore properties {{{
+			" Restore properties 
 				call s:VarReset('&scrolloff')
 				call s:VarReset('&modified')
 				call s:VarReset('&modifiable')
 				call s:VarReset('&readonly')
 				call s:VarReset('&spell')
 				call s:VarReset('&virtualedit')
-			" }}}
-			" Remove shading {{{
+			" 
+			" Remove shading 
 				if g:StupidEasyMotion_do_shade && exists('shade_hl_id')
 					call matchdelete(shade_hl_id)
 				endif
-			" }}}
+			" 
 		endtry
-	endfunction " }}}
-" }}}
+	endfunction " 
+" 
 
 " vim: fdm=marker:noet:ts=4:sw=4:sts=4

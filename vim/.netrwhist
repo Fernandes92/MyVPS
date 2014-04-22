@@ -1,4 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =2
-let g:netrw_dirhist_1='/home/regex/Downloads'
-let g:netrw_dirhist_2='/web/lab/tuts/CPrimerPlus/ch4'
+let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_1='/home/vagrant/projects/colonel'
+let g:netrw_dirhist_2='/home/vagrant'
+let g:netrw_dirhist_3='/etc/postgresql/9.1/main'
+let g:netrw_dirhist_4='/home/vagrant/projects/ahnew'
+let g:netrw_dirhist_5='/home/vagrant/projects/harper360'
