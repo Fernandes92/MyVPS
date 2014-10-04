@@ -12,6 +12,7 @@ set showcmd
 set ruler
 set incsearch
 set rnu
+set nonu
 set textwidth=80
 "set iskeyword-=_
 filetype plugin indent on
@@ -66,8 +67,10 @@ imap <F3> <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR>
 function! g:ToggleNuMode()
   if &nu == 1
      set rnu
+     set nonu
   else
      set nu
+     set nornu
   endif
 endfunction
 nnoremap <silent><C-L> :call g:ToggleNuMode()<cr>
