@@ -113,4 +113,4 @@ map <C-E> <Leader><Leader>W
 map T <Leader><Leader>f
 
 " Ignore git and virtualenv directories for ctrlP
-let g:ctrlp_custom_ignore = 'env\|git\|hg'
+let g:ctrlp_custom_ignore = 'env\|git'
