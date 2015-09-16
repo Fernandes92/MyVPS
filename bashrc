@@ -49,7 +49,8 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-PS1="(indicatorhere)\w\$ "
+INDICATOR="(indicatorhere)"
+PROMPT_COMMAND='__git_ps1 "$INDICATOR\w" "\\\$ "'
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -100,3 +101,4 @@ function simpleserv(){
 }
 alias clip="xclip -sel c"
 alias mg="python manage.py"
+source ~/.git-prompt.sh

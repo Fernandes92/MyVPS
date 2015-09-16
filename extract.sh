@@ -6,4 +6,5 @@ cp screenrc ~/.screenrc
 cp .gitconfig ~/.gitconfig
 cp .gitignore ~/.gitignore
 cp -r vim ~/.vim
-mkdir ~/.vim/sessions
+mkdir -p ~/.vim/sessions
+cp git-prompt.sh ~/.git-prompt.sh
