@@ -21,12 +21,6 @@ syntax enable
 " Underline the current line
 set cursorline
 
-" Swap visual mode and visual line commands
-nnoremap v V
-nnoremap V v
-vnoremap v V
-vnoremap V v
-
 " Activate backspace
 set backspace=indent,eol,start
 
